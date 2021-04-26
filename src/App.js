@@ -1,11 +1,24 @@
-import "./App.css";
-
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <p1>Hello world</p1>
-      </header>
+      <div className="App__sidebar">
+        <ul className="list">
+          <li className="active">Город по умолчанию</li>
+        </ul>
+        <ul className="list">
+          <li className="active">Добавленные города</li>
+        </ul>
+        <div className="add-list">
+          <input
+            className="field"
+            type="text"
+            placeholder="Введите название города:"
+            value=""
+          ></input>
+          <button class="button">Добавить</button>
+        </div>
+      </div>
+      <div className="App__mainWin">Выбранный город</div>
     </div>
   );
 }
