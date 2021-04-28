@@ -8,6 +8,7 @@ function App() {
   const [defaultCity, setDefaultCity] = useState("Москва");
   const [currentWeather, setCurrentWeather] = useState("Небольшая облачность");
   const [currentTemp, setCurrentTemp] = useState("13 C");
+  const [customCity, setCustomCity] = useState([]);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -36,8 +37,8 @@ function App() {
     <div className="App">
       <div className="App__sidebar">
         <DefaultCity defaultCity={defaultCity} />
-        <AddedCity />
-        <InputAdd />
+        <AddedCity customCity={customCity} />
+        <InputAdd customCity={customCity} setCustomCity={setCustomCity} />
       </div>
       <MainWindow
         defaultCity={defaultCity}
