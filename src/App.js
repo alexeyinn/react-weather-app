@@ -18,7 +18,7 @@ function App() {
 
       axios
         .get(
-          `http://api.openweathermap.org/data/2.5/weather?lat=${posLat}&lon=${posLong}&lang=ru&units=metric&appid=b71aa60c6985f035c25ba94fec60b0f3`
+          `https://api.openweathermap.org/data/2.5/weather?lat=${posLat}&lon=${posLong}&lang=ru&units=metric&appid=b71aa60c6985f035c25ba94fec60b0f3`
         )
         .then((res) => {
           setDefaultCity(res.data.name);
@@ -48,6 +48,7 @@ function App() {
         />
         <AddedCity
           customCity={customCity}
+          setCustomCity={setCustomCity}
           setDefaultCity={setDefaultCity}
           setChosenCity={setChosenCity}
           setCurrentTemp={setCurrentTemp}

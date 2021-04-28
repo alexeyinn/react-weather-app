@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import removeSVG from '../assets/img/remove.svg';
+
 export default function AddedCity(props) {
 
 const chosenCity = (e) => {
@@ -7,7 +9,7 @@ const chosenCity = (e) => {
 
   axios
         .get(
-          `http://api.openweathermap.org/data/2.5/weather?q=${e.target.outerText}&lang=ru&units=metric&APPID=b71aa60c6985f035c25ba94fec60b0f3`
+          `https://api.openweathermap.org/data/2.5/weather?q=${e.target.outerText}&lang=ru&units=metric&APPID=b71aa60c6985f035c25ba94fec60b0f3`
         )
         .then((res) => {
           const weatherData = res.data.weather[0].description;
@@ -21,11 +23,21 @@ const chosenCity = (e) => {
         });
 }
 
+const onRemove = (e) => {
+  function removeFromArr(arr, value) { 
+    return arr.filter(function(ele){ 
+        return ele !== value; 
+    });
+}
+props.setCustomCity(removeFromArr(props.customCity, e.target.attributes.name.value));
+}
+
     return (
         <ul className="list">
           {(props.customCity.length !== 0) ? (props.customCity.map((cities) => (
-            <li className="active" key={cities} onClick={chosenCity}>
-            <h1>{cities}</h1>
+            <li className="active" key={cities} >
+            <h1 onClick={chosenCity}>{cities}</h1>
+            <img className='removeIco' src={removeSVG} alt='remove icon' name={cities} onClick={onRemove}/>
           </li>
           ))) : (
             <li className="active">

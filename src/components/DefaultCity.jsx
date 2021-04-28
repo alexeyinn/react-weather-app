@@ -7,7 +7,7 @@ const backToDefaultCity = (e) => {
 
   axios
         .get(
-          `http://api.openweathermap.org/data/2.5/weather?q=${e.target.outerText}&lang=ru&units=metric&APPID=b71aa60c6985f035c25ba94fec60b0f3`
+          `https://api.openweathermap.org/data/2.5/weather?q=${e.target.outerText}&lang=ru&units=metric&APPID=b71aa60c6985f035c25ba94fec60b0f3`
         )
         .then((res) => {
           const weatherData = res.data.weather[0].description;
