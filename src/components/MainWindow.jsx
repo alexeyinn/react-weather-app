@@ -1,11 +1,10 @@
 export default function MainWindow(props) {
   return (
     <div className="App__mainWindow">
-      <h1 className="windowTitle">{props.defaultCity}</h1>
+      <h1 className="windowTitle">{props.chosenCity}</h1>
       <div className="cards">
         <div
           className="card text-dark bg-light mb-3"
-          style={{ maxWidth: 18 + "rem" }}
         >
           <div className="card-header">Погода</div>
           <div className="card-body">

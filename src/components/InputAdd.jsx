@@ -4,7 +4,7 @@ export default React.memo(function InputAdd(props) {
 const [inputData, setInputData] = useState("");
 
 const cityAdd = () => {
-  props.setCustomCity([...props.customCity, inputData]);
+  inputData !== '' ? props.setCustomCity([...props.customCity, inputData]) : alert('Название не может быть пустым! Введите корректное название города!');
 }
 
     return (

@@ -9,6 +9,7 @@ function App() {
   const [currentWeather, setCurrentWeather] = useState("Небольшая облачность");
   const [currentTemp, setCurrentTemp] = useState("13 C");
   const [customCity, setCustomCity] = useState([]);
+  const [chosenCity, setChosenCity] = useState(defaultCity);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -21,6 +22,7 @@ function App() {
         )
         .then((res) => {
           setDefaultCity(res.data.name);
+          setChosenCity(res.data.name);
           const weatherData = res.data.weather[0].description;
           const niceViewWeatherData =
             weatherData.charAt(0).toUpperCase() + weatherData.slice(1);
@@ -31,19 +33,33 @@ function App() {
           alert("Не получили прогноз погоды! Попробуйте обновить страницу!");
         });
     });
-  });
+  }, []);
 
   return (
     <div className="App">
       <div className="App__sidebar">
-        <DefaultCity defaultCity={defaultCity} />
-        <AddedCity customCity={customCity} />
+        <DefaultCity
+          defaultCity={defaultCity}
+          customCity={customCity}
+          setDefaultCity={setDefaultCity}
+          setChosenCity={setChosenCity}
+          setCurrentTemp={setCurrentTemp}
+          setCurrentWeather={setCurrentWeather}
+        />
+        <AddedCity
+          customCity={customCity}
+          setDefaultCity={setDefaultCity}
+          setChosenCity={setChosenCity}
+          setCurrentTemp={setCurrentTemp}
+          setCurrentWeather={setCurrentWeather}
+        />
         <InputAdd customCity={customCity} setCustomCity={setCustomCity} />
       </div>
       <MainWindow
         defaultCity={defaultCity}
         currentWeather={currentWeather}
         currentTemp={currentTemp}
+        chosenCity={chosenCity}
       />
     </div>
   );
