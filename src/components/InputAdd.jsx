@@ -20,6 +20,7 @@ const cityAdd = () => {
             placeholder="Введите название города:"
             value={inputData}
             onInput={e => setInputData(e.target.value)}
+            onKeyDown={e => e.key === 'Enter' ? cityAdd() : ''}
           ></input>
           <button className="button" onClick={cityAdd}>Добавить</button>
         </div>
