@@ -1,8 +1,17 @@
+import React, { useState } from 'react';
+
 import axios from 'axios';
+import classNames from 'classnames';
 
 import removeSVG from '../assets/img/remove.svg';
 
 export default function AddedCity(props) {
+
+const [activeClass, setActiveClass] = useState('');
+
+const onActive = (e) => {
+  setActiveClass(e.target.innerText);
+}
 
 const chosenCity = (e) => {
   props.setChosenCity(e.target.outerText);
@@ -35,7 +44,9 @@ props.setCustomCity(removeFromArr(props.customCity, e.target.attributes.name.val
     return (
         <ul className="list">
           {(props.customCity.length !== 0) ? (props.customCity.map((cities) => (
-            <li className="active" key={cities} >
+            <li className={classNames('nonActive', {
+              'active': activeClass === cities
+            })} key={cities} onClick={onActive}>
             <h1 onClick={chosenCity}>{cities}</h1>
             <img className='removeIco' src={removeSVG} alt='remove icon' name={cities} onClick={onRemove}/>
           </li>

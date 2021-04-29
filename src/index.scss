@@ -26,6 +26,14 @@ li {
     .list {
       margin-bottom: 50px;
 
+      .nonActive {
+        box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.04);
+        border-radius: 4px;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      }
+
       .active {
         background: #ffffff;
         box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.04);
@@ -33,10 +41,10 @@ li {
         display: flex;
         justify-content: space-between;
         margin-bottom: 10px;
+      }
 
-        .removeIco {
-          margin-right: 20px;
-        }
+      .removeIco {
+        margin-right: 20px;
       }
     }
 
