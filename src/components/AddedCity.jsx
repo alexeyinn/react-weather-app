@@ -1,16 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useSelector, useDispatch } from "react-redux";
 
 import axios from 'axios';
 import classNames from 'classnames';
+
+import { setActiveCity } from '../redux/actions/activeCity';
 
 import removeSVG from '../assets/img/remove.svg';
 
 export default function AddedCity(props) {
 
-const [activeClass, setActiveClass] = useState('');
+  const dispatch = useDispatch();
+  const { activeCityIs } = useSelector(({activeCity}) => activeCity);
 
 const onActive = (e) => {
-  setActiveClass(e.target.innerText);
+  dispatch(setActiveCity(e.target.innerText));
 }
 
 const chosenCity = (e) => {
@@ -44,8 +48,9 @@ props.setCustomCity(removeFromArr(props.customCity, e.target.attributes.name.val
     return (
         <ul className="list">
           {(props.customCity.length !== 0) ? (props.customCity.map((cities) => (
-            <li className={classNames('nonActive', {
-              'active': activeClass === cities
+            <li className={classNames({
+              'nonActive': activeCityIs !== cities,
+              'active': activeCityIs === cities
             })} key={cities} onClick={onActive}>
             <h1 onClick={chosenCity}>{cities}</h1>
             <img className='removeIco' src={removeSVG} alt='remove icon' name={cities} onClick={onRemove}/>
