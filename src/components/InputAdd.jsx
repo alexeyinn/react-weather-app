@@ -1,7 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react';
+import { useSelector, useDispatch } from "react-redux";
+
+import { getInputData } from '../redux/actions/inputData';
 
 export default React.memo(function InputAdd(props) {
-const [inputData, setInputData] = useState("");
+//const [inputData, setInputData] = useState("");
+
+const dispatch = useDispatch();
+const { inputDataIs } = useSelector(({inputData}) => inputData);
 
 const cityAdd = () => {
   function titleCase(str) {
@@ -11,11 +17,11 @@ const cityAdd = () => {
     }
     return splitStr.join(' '); 
  }
-const niceViwedData = titleCase(inputData);
+const niceViwedData = titleCase(inputDataIs);
 
-  if (inputData !== '') {
+  if (inputDataIs !== '') {
     props.setCustomCity([...props.customCity, niceViwedData]);
-    setInputData('');
+    dispatch(getInputData(''));
   } else {
     alert('Название не может быть пустым! Введите корректное название города!')
   }
@@ -27,8 +33,8 @@ const niceViwedData = titleCase(inputData);
             className="field"
             type="text"
             placeholder="Введите название города:"
-            value={inputData}
-            onInput={e => setInputData(e.target.value)}
+            value={inputDataIs}
+            onInput={e => dispatch(getInputData(e.target.value))}
             onKeyDown={e => e.key === 'Enter' ? cityAdd() : ''}
           ></input>
           <button className="button" onClick={cityAdd}>Добавить</button>
