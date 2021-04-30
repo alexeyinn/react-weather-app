@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from 'axios';
 import classNames from 'classnames';
 
-import { setTemp } from '../redux/actions/weather';
+import { setTemp, setWeather } from '../redux/actions/weather';
 import { setActiveCity } from '../redux/actions/activeCity';
 
 import removeSVG from '../assets/img/remove.svg';
@@ -26,7 +26,7 @@ const onActive = (e) => {
           const weatherData = res.data.weather[0].description;
           const niceViewWeatherData =
             weatherData.charAt(0).toUpperCase() + weatherData.slice(1);
-          props.setCurrentWeather(niceViewWeatherData);
+          dispatch(setWeather(niceViewWeatherData));
           dispatch(setTemp((Math.floor(res.data.main.temp) + " C")));
         })
         .catch(() => {

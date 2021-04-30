@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 
-import { setTemp } from "./redux/actions/weather";
+import { setTemp, setWeather } from "./redux/actions/weather";
 
 import { MainWindow, DefaultCity, AddedCity, InputAdd } from "./components";
 
@@ -11,7 +11,6 @@ function App() {
   const dispatch = useDispatch();
 
   const [defaultCity, setDefaultCity] = useState("Москва");
-  const [currentWeather, setCurrentWeather] = useState("Небольшая облачность");
   const [customCity, setCustomCity] = useState([]);
   const [chosenCity, setChosenCity] = useState(defaultCity);
 
@@ -27,7 +26,7 @@ function App() {
           const weatherData = res.data.weather[0].description;
           const niceViewWeatherData =
             weatherData.charAt(0).toUpperCase() + weatherData.slice(1);
-          setCurrentWeather(niceViewWeatherData);
+          dispatch(setWeather(niceViewWeatherData));
           dispatch(setTemp(Math.floor(res.data.main.temp) + " C"));
         })
         .catch(() => {
@@ -53,22 +52,16 @@ function App() {
           customCity={customCity}
           setDefaultCity={setDefaultCity}
           setChosenCity={setChosenCity}
-          setCurrentWeather={setCurrentWeather}
         />
         <AddedCity
           customCity={customCity}
           setCustomCity={setCustomCity}
           setDefaultCity={setDefaultCity}
           setChosenCity={setChosenCity}
-          setCurrentWeather={setCurrentWeather}
         />
         <InputAdd customCity={customCity} setCustomCity={setCustomCity} />
       </div>
-      <MainWindow
-        defaultCity={defaultCity}
-        currentWeather={currentWeather}
-        chosenCity={chosenCity}
-      />
+      <MainWindow defaultCity={defaultCity} chosenCity={chosenCity} />
     </div>
   );
 }

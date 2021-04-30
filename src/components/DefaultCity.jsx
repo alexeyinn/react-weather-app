@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 
 import axios from 'axios';
 
-import { setTemp } from '../redux/actions/weather';
+import { setTemp, setWeather } from '../redux/actions/weather';
 
 export default function DefaultCity(props) {
 
@@ -19,7 +19,7 @@ const backToDefaultCity = (e) => {
           const weatherData = res.data.weather[0].description;
           const niceViewWeatherData =
             weatherData.charAt(0).toUpperCase() + weatherData.slice(1);
-          props.setCurrentWeather(niceViewWeatherData);
+          dispatch(setWeather(niceViewWeatherData));
           dispatch(setTemp((Math.floor(res.data.main.temp) + " C")));
         })
         .catch(() => {
