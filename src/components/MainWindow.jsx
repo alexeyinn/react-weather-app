@@ -1,4 +1,9 @@
+import { useSelector } from 'react-redux';
+
 export default function MainWindow(props) {
+
+  const { tempIs } = useSelector(({weather}) => weather);
+
   return (
     <div className="App__mainWindow">
       <h1 className="windowTitle">{props.chosenCity}</h1>
@@ -18,7 +23,7 @@ export default function MainWindow(props) {
           <div className="card-header">Температура воздуха</div>
           <div className="card-body">
             <h1 className="card-title">
-              {props.currentTemp}<sup>o</sup>
+              {tempIs}<sup>o</sup>
             </h1>
           </div>
         </div>

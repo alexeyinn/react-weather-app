@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from 'axios';
 import classNames from 'classnames';
 
+import { setTemp } from '../redux/actions/weather';
 import { setActiveCity } from '../redux/actions/activeCity';
 
 import removeSVG from '../assets/img/remove.svg';
@@ -26,7 +27,7 @@ const onActive = (e) => {
           const niceViewWeatherData =
             weatherData.charAt(0).toUpperCase() + weatherData.slice(1);
           props.setCurrentWeather(niceViewWeatherData);
-          props.setCurrentTemp(Math.floor(res.data.main.temp) + " C");
+          dispatch(setTemp((Math.floor(res.data.main.temp) + " C")));
         })
         .catch(() => {
           alert("Не получили прогногз погоды от сервера! Проверьте название города и попробуйте его добавить снова в список отслеживания!");

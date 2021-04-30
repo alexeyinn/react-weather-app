@@ -1,6 +1,12 @@
+import { useDispatch } from 'react-redux';
+
 import axios from 'axios';
 
+import { setTemp } from '../redux/actions/weather';
+
 export default function DefaultCity(props) {
+
+  const dispatch = useDispatch();
 
 const backToDefaultCity = (e) => {
   props.setChosenCity(e.target.outerText);
@@ -14,7 +20,7 @@ const backToDefaultCity = (e) => {
           const niceViewWeatherData =
             weatherData.charAt(0).toUpperCase() + weatherData.slice(1);
           props.setCurrentWeather(niceViewWeatherData);
-          props.setCurrentTemp(Math.floor(res.data.main.temp) + " C");
+          dispatch(setTemp((Math.floor(res.data.main.temp) + " C")));
         })
         .catch(() => {
           alert("Не получили прогногз погоды от сервера! Проверьте название города и попробуйте его добавить снова в список отслеживания!");
