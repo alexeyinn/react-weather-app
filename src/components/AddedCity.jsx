@@ -15,9 +15,7 @@ export default function AddedCity(props) {
 
 const onActive = (e) => {
   dispatch(setActiveCity(e.target.innerText));
-}
 
-const chosenCity = (e) => {
   props.setChosenCity(e.target.outerText);
 
   axios
@@ -51,8 +49,8 @@ props.setCustomCity(removeFromArr(props.customCity, e.target.attributes.name.val
             <li className={classNames({
               'nonActive': activeCityIs !== cities,
               'active': activeCityIs === cities
-            })} key={cities} onClick={onActive}>
-            <h1 onClick={chosenCity}>{cities}</h1>
+            })} key={cities}>
+            <h1 onClick={onActive}>{cities}</h1>
             <img className='removeIco' src={removeSVG} alt='remove icon' name={cities} onClick={onRemove}/>
           </li>
           ))) : (
