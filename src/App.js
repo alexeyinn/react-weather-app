@@ -34,14 +34,19 @@ function App() {
         });
     };
 
-    defaultCityWeather("q=москва");
-
     navigator.geolocation.getCurrentPosition(function (position) {
       const posLat = position.coords.latitude;
       const posLong = position.coords.longitude;
 
       defaultCityWeather(`lat=${posLat}&lon=${posLong}`);
     });
+    navigator.geolocation.watchPosition(
+      function () {},
+      function (error) {
+        if (error.code === error.PERMISSION_DENIED)
+          defaultCityWeather("q=москва");
+      }
+    );
   }, [dispatch]);
 
   return (
