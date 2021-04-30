@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { getInputData } from '../redux/actions/inputData';
 
 export default React.memo(function InputAdd(props) {
-//const [inputData, setInputData] = useState("");
 
 const dispatch = useDispatch();
 const { inputDataIs } = useSelector(({inputData}) => inputData);

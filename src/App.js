@@ -11,27 +11,33 @@ function App() {
   const [customCity, setCustomCity] = useState([]);
   const [chosenCity, setChosenCity] = useState(defaultCity);
 
+  const defaultCityWeather = async (searchQuery) => {
+    await axios
+      .get(
+        `https://api.openweathermap.org/data/2.5/weather?${searchQuery}&lang=ru&units=metric&appid=b71aa60c6985f035c25ba94fec60b0f3`
+      )
+      .then((res) => {
+        setDefaultCity(res.data.name);
+        setChosenCity(res.data.name);
+        const weatherData = res.data.weather[0].description;
+        const niceViewWeatherData =
+          weatherData.charAt(0).toUpperCase() + weatherData.slice(1);
+        setCurrentWeather(niceViewWeatherData);
+        setCurrentTemp(Math.floor(res.data.main.temp) + " C");
+      })
+      .catch(() => {
+        alert("Не получили прогноз погоды! Попробуйте обновить страницу!");
+      });
+  };
+
   useEffect(() => {
+    defaultCityWeather("q=москва");
+
     navigator.geolocation.getCurrentPosition(function (position) {
       const posLat = position.coords.latitude;
       const posLong = position.coords.longitude;
 
-      axios
-        .get(
-          `https://api.openweathermap.org/data/2.5/weather?lat=${posLat}&lon=${posLong}&lang=ru&units=metric&appid=b71aa60c6985f035c25ba94fec60b0f3`
-        )
-        .then((res) => {
-          setDefaultCity(res.data.name);
-          setChosenCity(res.data.name);
-          const weatherData = res.data.weather[0].description;
-          const niceViewWeatherData =
-            weatherData.charAt(0).toUpperCase() + weatherData.slice(1);
-          setCurrentWeather(niceViewWeatherData);
-          setCurrentTemp(Math.floor(res.data.main.temp) + " C");
-        })
-        .catch(() => {
-          alert("Не получили прогноз погоды! Попробуйте обновить страницу!");
-        });
+      defaultCityWeather(`lat=${posLat}&lon=${posLong}`);
     });
   }, []);
 
