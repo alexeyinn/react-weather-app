@@ -2,14 +2,14 @@ import { useSelector, useDispatch } from "react-redux";
 
 import classNames from 'classnames';
 
-import { setActiveCity } from '../redux/actions/activeCity';
+import { setActiveCity } from '../redux/actions/cities';
 
 import removeSVG from '../assets/img/remove.svg';
 
 export default function AddedCity(props) {
 
   const dispatch = useDispatch();
-  const { activeCityIs } = useSelector(({activeCity}) => activeCity);
+  const { activeCityIs } = useSelector(({cities}) => cities);
 
 const onActive = (e) => {
   dispatch(setActiveCity(e.target.innerText));

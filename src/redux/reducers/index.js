@@ -1,11 +1,11 @@
 import { combineReducers } from "redux";
 
-import activeCity from "./activeCity";
+import cities from "./cities";
 import inputData from "./inputData";
 import weather from "./weather";
 
 const rootReducer = combineReducers({
-  activeCity,
+  cities,
   inputData,
   weather,
 });
