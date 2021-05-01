@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import classNames from 'classnames';
 
 import { setActiveCity } from '../redux/actions/cities';
+import { setChosenCity } from "../redux/actions/cities";
 
 import removeSVG from '../assets/img/remove.svg';
 
@@ -12,9 +13,10 @@ export default function AddedCity(props) {
   const { activeCityIs } = useSelector(({cities}) => cities);
 
 const onActive = (e) => {
-  dispatch(setActiveCity(e.target.innerText));
-  props.setChosenCity(e.target.outerText);
-  props.getWeatherAPI('q=' + e.target.outerText, false)
+  const cityName = e.target.outerText
+  dispatch(setActiveCity(cityName));
+  dispatch(setChosenCity(cityName));
+  props.getWeatherAPI('q=' + cityName, false)
 }
 
 const onRemove = (e) => {

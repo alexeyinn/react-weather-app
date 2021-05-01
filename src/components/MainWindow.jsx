@@ -3,10 +3,11 @@ import { useSelector } from 'react-redux';
 export default function MainWindow(props) {
 
   const { tempIs, weatherIs } = useSelector(({weather}) => weather);
+  const { chosenCityIs } = useSelector(({ cities }) => cities);
 
   return (
     <div className="App__mainWindow">
-      <h1 className="windowTitle">{props.chosenCity}</h1>
+      <h1 className="windowTitle">{chosenCityIs}</h1>
       <div className="cards">
         <div
           className="card text-dark bg-light mb-3"

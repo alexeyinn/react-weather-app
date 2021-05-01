@@ -1,6 +1,7 @@
 const initialState = {
   activeCityIs: "",
   defaultCityIs: "Москва",
+  chosenCityIs: "Москва",
 };
 
 const cities = (state = initialState, action) => {
@@ -16,6 +17,13 @@ const cities = (state = initialState, action) => {
       return {
         ...state,
         defaultCityIs: action.payload,
+      };
+    }
+
+    case "SET_CHOSEN_CITY": {
+      return {
+        ...state,
+        chosenCityIs: action.payload,
       };
     }
 

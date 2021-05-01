@@ -1,20 +1,18 @@
 import React, { useState, useEffect, useCallback } from "react";
 
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { setWeather } from "./redux/actions/weather";
 import { setDefaultCity } from "./redux/actions/cities";
+import { setChosenCity } from "./redux/actions/cities";
 
 import { MainWindow, DefaultCity, AddedCity, InputAdd } from "./components";
 
 function App() {
   const dispatch = useDispatch();
 
-  const { defaultCityIs } = useSelector(({ cities }) => cities);
-
   const [customCity, setCustomCity] = useState([]);
-  const [chosenCity, setChosenCity] = useState(defaultCityIs);
 
   const getWeatherAPI = useCallback(
     (searchQuery, firstLaunch) => {
@@ -25,7 +23,7 @@ function App() {
         .then((res) => {
           if (firstLaunch === true) {
             dispatch(setDefaultCity(res.data.name));
-            setChosenCity(res.data.name);
+            dispatch(setChosenCity(res.data.name));
           }
           dispatch(
             setWeather(res.data.weather[0].description, res.data.main.temp)
@@ -59,20 +57,15 @@ function App() {
   return (
     <div className="App">
       <div className="App__sidebar">
-        <DefaultCity
-          customCity={customCity}
-          setChosenCity={setChosenCity}
-          getWeatherAPI={getWeatherAPI}
-        />
+        <DefaultCity customCity={customCity} getWeatherAPI={getWeatherAPI} />
         <AddedCity
           customCity={customCity}
           setCustomCity={setCustomCity}
-          setChosenCity={setChosenCity}
           getWeatherAPI={getWeatherAPI}
         />
         <InputAdd customCity={customCity} setCustomCity={setCustomCity} />
       </div>
-      <MainWindow chosenCity={chosenCity} />
+      <MainWindow />
     </div>
   );
 }

@@ -1,10 +1,13 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
+import { setChosenCity } from "../redux/actions/cities";
 
 export default function DefaultCity(props) {
+  const dispatch = useDispatch();
   const { defaultCityIs } = useSelector(({cities}) => cities);
 
 const backToDefaultCity = (e) => {
-props.setChosenCity(e.target.outerText);
+dispatch(setChosenCity(e.target.outerText));
 props.getWeatherAPI('q=' + e.target.outerText, false)
 }
 
