@@ -1,9 +1,5 @@
-export const setWeather = (weather) => ({
+export const setWeather = (weather, temp) => ({
   type: "SET_WEATHER",
-  payload: weather,
-});
-
-export const setTemp = (temp) => ({
-  type: "SET_TEMP",
-  payload: temp,
+  weather,
+  temp,
 });

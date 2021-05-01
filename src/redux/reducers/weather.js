@@ -6,16 +6,13 @@ const initialState = {
 const weather = (state = initialState, action) => {
   switch (action.type) {
     case "SET_WEATHER": {
-      return {
-        ...state,
-        weatherIs: action.payload,
-      };
-    }
+      const weatherData = action.weather;
+      const niceViewWeatherData =
+        weatherData.charAt(0).toUpperCase() + weatherData.slice(1);
 
-    case "SET_TEMP": {
       return {
-        ...state,
-        tempIs: action.payload,
+        weatherIs: niceViewWeatherData,
+        tempIs: Math.floor(action.temp) + " C",
       };
     }
 

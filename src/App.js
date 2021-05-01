@@ -3,7 +3,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 
-import { setTemp, setWeather } from "./redux/actions/weather";
+import { setWeather } from "./redux/actions/weather";
 import { setDefaultCity } from "./redux/actions/cities";
 
 import { MainWindow, DefaultCity, AddedCity, InputAdd } from "./components";
@@ -27,14 +27,14 @@ function App() {
             dispatch(setDefaultCity(res.data.name));
             setChosenCity(res.data.name);
           }
-          const weatherData = res.data.weather[0].description;
-          const niceViewWeatherData =
-            weatherData.charAt(0).toUpperCase() + weatherData.slice(1);
-          dispatch(setWeather(niceViewWeatherData));
-          dispatch(setTemp(Math.floor(res.data.main.temp) + " C"));
+          dispatch(
+            setWeather(res.data.weather[0].description, res.data.main.temp)
+          );
         })
         .catch(() => {
-          alert("Не получили прогноз погоды! Попробуйте обновить страницу!");
+          alert(
+            "Не получили прогноз погоды! Проверьте название города и попробуйте снова!"
+          );
         });
     },
     [dispatch]
