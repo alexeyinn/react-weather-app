@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from "react-redux";
 
 import { getInputData } from '../redux/actions/inputData';
+import { addCity } from '../redux/actions/cities';
 
 export default React.memo(function InputAdd(props) {
 
@@ -9,17 +10,9 @@ const dispatch = useDispatch();
 const { inputDataIs } = useSelector(({inputData}) => inputData);
 
 const cityAdd = () => {
-  function titleCase(str) {
-    let splitStr = str.toLowerCase().split(' ');
-    for (let i = 0; i < splitStr.length; i++) {
-        splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].slice(1);     
-    }
-    return splitStr.join(' '); 
- }
-const niceViwedData = titleCase(inputDataIs);
 
   if (inputDataIs !== '') {
-    props.setCustomCity([...props.customCity, niceViwedData]);
+    dispatch(addCity(inputDataIs));
     dispatch(getInputData(''));
   } else {
     alert('Название не может быть пустым! Введите корректное название города!')

@@ -2,15 +2,14 @@ import { useSelector, useDispatch } from "react-redux";
 
 import classNames from 'classnames';
 
-import { setActiveCity } from '../redux/actions/cities';
-import { setChosenCity } from "../redux/actions/cities";
+import { setActiveCity, setChosenCity, removeCity } from '../redux/actions/cities';
 
 import removeSVG from '../assets/img/remove.svg';
 
 export default function AddedCity(props) {
 
   const dispatch = useDispatch();
-  const { activeCityIs } = useSelector(({cities}) => cities);
+  const { activeCityIs, addedCity } = useSelector(({cities}) => cities);
 
 const onActive = (e) => {
   const cityName = e.target.outerText
@@ -20,17 +19,12 @@ const onActive = (e) => {
 }
 
 const onRemove = (e) => {
-  function removeFromArr(arr, value) { 
-    return arr.filter(function(ele){ 
-        return ele !== value; 
-    });
-}
-props.setCustomCity(removeFromArr(props.customCity, e.target.attributes.name.value));
+dispatch(removeCity(e.target.attributes.name.value));
 }
 
     return (
         <ul className="list">
-          {(props.customCity.length !== 0) ? (props.customCity.map((cities) => (
+          {(addedCity.length !== 0) ? (addedCity.map((cities) => (
             <li className={classNames({
               'nonActive': activeCityIs !== cities,
               'active': activeCityIs === cities

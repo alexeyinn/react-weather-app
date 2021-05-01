@@ -1,18 +1,15 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useEffect, useCallback } from "react";
 
 import axios from "axios";
 import { useDispatch } from "react-redux";
 
 import { setWeather } from "./redux/actions/weather";
-import { setDefaultCity } from "./redux/actions/cities";
-import { setChosenCity } from "./redux/actions/cities";
+import { setDefaultCity, setChosenCity } from "./redux/actions/cities";
 
 import { MainWindow, DefaultCity, AddedCity, InputAdd } from "./components";
 
 function App() {
   const dispatch = useDispatch();
-
-  const [customCity, setCustomCity] = useState([]);
 
   const getWeatherAPI = useCallback(
     (searchQuery, firstLaunch) => {
@@ -42,7 +39,6 @@ function App() {
     navigator.geolocation.getCurrentPosition(function (position) {
       const posLat = position.coords.latitude;
       const posLong = position.coords.longitude;
-
       getWeatherAPI(`lat=${posLat}&lon=${posLong}`, true);
     });
     navigator.geolocation.watchPosition(
@@ -57,13 +53,9 @@ function App() {
   return (
     <div className="App">
       <div className="App__sidebar">
-        <DefaultCity customCity={customCity} getWeatherAPI={getWeatherAPI} />
-        <AddedCity
-          customCity={customCity}
-          setCustomCity={setCustomCity}
-          getWeatherAPI={getWeatherAPI}
-        />
-        <InputAdd customCity={customCity} setCustomCity={setCustomCity} />
+        <DefaultCity getWeatherAPI={getWeatherAPI} />
+        <AddedCity getWeatherAPI={getWeatherAPI} />
+        <InputAdd />
       </div>
       <MainWindow />
     </div>

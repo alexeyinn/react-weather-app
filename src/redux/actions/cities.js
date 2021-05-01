@@ -12,3 +12,13 @@ export const setChosenCity = (chosenCity) => ({
   type: "SET_CHOSEN_CITY",
   payload: chosenCity,
 });
+
+export const addCity = (addedCity) => ({
+  type: "ADD_CITY",
+  payload: addedCity,
+});
+
+export const removeCity = (removedCity) => ({
+  type: "REMOVE_CITY",
+  payload: removedCity,
+});
