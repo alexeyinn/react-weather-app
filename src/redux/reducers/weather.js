@@ -1,18 +1,27 @@
 const initialState = {
-  weatherIs: "Небольшая облачность",
-  tempIs: "13 C",
+  weather: [],
 };
 
 const weather = (state = initialState, action) => {
   switch (action.type) {
     case "SET_WEATHER": {
-      const weatherData = action.weather;
-      const niceViewWeatherData =
-        weatherData.charAt(0).toUpperCase() + weatherData.slice(1);
+      const weatherData = action.payload;
+      const stateOfWeather = weatherData.weather[0].description;
+      const niceViewWeatherText =
+        stateOfWeather.charAt(0).toUpperCase() +
+        weatherData.weather[0].description.slice(1);
 
       return {
-        weatherIs: niceViewWeatherData,
-        tempIs: Math.floor(action.temp) + " C",
+        weather: [
+          {
+            weatherDescription: "Погодные условия",
+            weatherData: niceViewWeatherText,
+          },
+          {
+            weatherDescription: "Температура воздуха",
+            weatherData: Math.floor(weatherData.main.temp) + " C",
+          },
+        ],
       };
     }
 

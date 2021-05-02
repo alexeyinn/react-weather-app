@@ -1,5 +1,4 @@
-export const setWeather = (weather, temp) => ({
+export const setWeather = (weatherData) => ({
   type: "SET_WEATHER",
-  weather,
-  temp,
+  payload: weatherData,
 });

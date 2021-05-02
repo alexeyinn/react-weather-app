@@ -7,7 +7,7 @@ import { setWeather } from "./redux/actions/weather";
 import { setDefaultCity, setChosenCity } from "./redux/actions/cities";
 
 import { MainWindow, DefaultCity, AddedCity, InputAdd } from "./components";
-
+//ToDo Добавить карточки погоды
 function App() {
   const dispatch = useDispatch();
 
@@ -22,9 +22,7 @@ function App() {
             dispatch(setDefaultCity(res.data.name));
             dispatch(setChosenCity(res.data.name));
           }
-          dispatch(
-            setWeather(res.data.weather[0].description, res.data.main.temp)
-          );
+          dispatch(setWeather(res.data));
         })
         .catch(() => {
           alert(
