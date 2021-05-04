@@ -69,6 +69,7 @@ li {
 
     .cards {
       display: flex;
+      flex-wrap: wrap;
 
       .card {
         max-width: 22rem;

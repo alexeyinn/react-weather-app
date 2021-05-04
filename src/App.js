@@ -7,7 +7,7 @@ import { setWeather } from "./redux/actions/weather";
 import { setDefaultCity, setChosenCity } from "./redux/actions/cities";
 
 import { MainWindow, DefaultCity, AddedCity, InputAdd } from "./components";
-//ToDo Добавить карточки погоды
+
 function App() {
   const dispatch = useDispatch();
 
